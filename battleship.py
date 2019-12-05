@@ -11,6 +11,7 @@ def print_board(board):
   for row in board:
     print " ".join(row)
 
+print "Welcome to HeatSeeker!\nThe game that challenges you to pick one spot out of 25!\n\n\n"
 print_board(board)
 
 #Set where the battleship will go
@@ -33,11 +34,11 @@ print ship_col
 def run_game():
   for turn in range(4):
       print "Turn", turn
-      guess_row = int(raw_input("Guess Row: "))-1
-      guess_col = int(raw_input("Guess Col: "))-1
+      guess_row = int(raw_input("Guess Row: "))
+      guess_col = int(raw_input("Guess Col: "))
 
       if guess_row == ship_row and guess_col == ship_col:
-        print "Congratulations! You sunk my battleship!"
+        print "Congratulations! You have won HeatSeeker!"
         break
     
       else:
@@ -45,15 +46,17 @@ def run_game():
           print "Oops, that's not even in the ocean."
 
         elif(board[guess_row][guess_col] == "X"):
-          print "You guessed that one already."
+          print "Your missle has already gone there."
 
-        elif((guess_row - ship_row == 1 or guess_row - ship_row == -1) and (guess_col - ship_col == 1 or guess_col - ship_col == -1)):
+        elif(((guess_row - ship_row == 1 or guess_row - ship_row == -1) and (guess_col - ship_col == 1 or guess_col - ship_col == -1)) 
+        	or ((guess_row == ship_row) and (guess_col - ship_col == 1 or guess_col - ship_col == -1)) 
+        	or ((guess_row - ship_row == 1 or guess_row - ship_row == -1) and (guess_col == ship_col))):
       	  print "Close, but no cigar!"
-      	  print "You missed my battleship!"
+      	  print "You just missed locking on!"
           board[guess_row][guess_col] = "X"
 
         else:
-          print "You missed my battleship!"
+          print "Your missle did not lock on!"
           board[guess_row][guess_col] = "X"
 
         if turn == 3:
